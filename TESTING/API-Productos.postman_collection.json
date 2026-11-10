@@ -1,0 +1,68 @@
+{
+  "info": {
+    "name": "API Productos - ZENTRA",
+    "description": "Pruebas del CRUD de productos. Ejecútalas en orden, con el backend encendido y la base vacía.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base", "value": "http://localhost:8080/api/productos" }
+  ],
+  "item": [
+    {
+      "name": "1. Crear producto (201)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base}}",
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Ron Medellín\",\n  \"categoria\": \"Licores\",\n  \"precio\": 45000,\n  \"stock\": 25,\n  \"stockMinimo\": 10\n}", "options": { "raw": { "language": "json" } } }
+      }
+    },
+    {
+      "name": "2. Listar productos (200)",
+      "request": { "method": "GET", "url": "{{base}}" }
+    },
+    {
+      "name": "3. Consultar por id (200)",
+      "request": { "method": "GET", "url": "{{base}}/1" }
+    },
+    {
+      "name": "4. Actualizar producto (200)",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base}}/1",
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Ron Medellín\",\n  \"categoria\": \"Licores\",\n  \"precio\": 50000,\n  \"stock\": 20,\n  \"stockMinimo\": 10\n}", "options": { "raw": { "language": "json" } } }
+      }
+    },
+    {
+      "name": "Buscar por nombre (200)",
+      "request": { "method": "GET", "url": "{{base}}/buscar?nombre=ron" }
+    },
+    {
+      "name": "Validación: datos inválidos (400)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base}}",
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"\",\n  \"precio\": -5,\n  \"stock\": -1\n}", "options": { "raw": { "language": "json" } } }
+      }
+    },
+    {
+      "name": "Regla de negocio: nombre duplicado (400)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base}}",
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Ron Medellín\",\n  \"categoria\": \"Licores\",\n  \"precio\": 45000,\n  \"stock\": 25,\n  \"stockMinimo\": 10\n}", "options": { "raw": { "language": "json" } } }
+      }
+    },
+    {
+      "name": "5. Eliminar producto (204)",
+      "request": { "method": "DELETE", "url": "{{base}}/1" }
+    },
+    {
+      "name": "6. Consultar eliminado (404)",
+      "request": { "method": "GET", "url": "{{base}}/1" }
+    }
+  ]
+}

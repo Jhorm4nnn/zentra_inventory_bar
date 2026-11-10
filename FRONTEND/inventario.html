@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZENTRA - Inventario</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1>ZENTRA</h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="inventario.html">Inventario</a></li>
+            <li><a href="ventas.html">Ventas</a></li>
+            <li><a href="reportes.html">Reportes</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section>
+        <h2>Control de inventario</h2>
+        <p>Consultar y actualizar el stock de los productos.</p>
+    </section>
+
+    <section>
+        <h2>Inventario actual</h2>
+        <table border="1">
+            <thead>
+                <tr><th>Producto</th><th>Stock actual</th><th>Stock mínimo</th><th>Estado</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Producto ejemplo</td><td>25</td><td>10</td><td>Disponible</td></tr>
+                <tr><td>Producto con poco stock</td><td>5</td><td>10</td><td>Bajo stock</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Actualizar stock</h2>
+        <form action="#" method="post">
+            <p><label for="producto">Producto:</label>
+            <input type="text" id="producto" name="producto" required></p>
+            <p><label for="stock">Nueva cantidad:</label>
+            <input type="number" id="stock" name="stock" min="0" required></p>
+            <button type="submit">Actualizar inventario</button>
+        </form>
+    </section>
+</main>
+
+<footer><p>ZENTRA - Estanco Dejavu</p></footer>
+<script src="inventario.js"></script>
+</body>
+</html>
