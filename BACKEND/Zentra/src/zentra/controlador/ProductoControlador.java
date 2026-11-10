@@ -218,7 +218,7 @@ public class ProductoControlador implements HttpHandler {
         }
     }
 
-    private static String parametro(HttpExchange ex, String nombre) {
+    static String parametro(HttpExchange ex, String nombre) {
         String consulta = ex.getRequestURI().getRawQuery();
         if (consulta == null) {
             return null;
@@ -234,7 +234,7 @@ public class ProductoControlador implements HttpHandler {
     }
 
     /** Si la petición viene de otra dirección, solo se acepta si es el frontend. */
-    private static boolean permitirOrigen(HttpExchange ex) {
+    static boolean permitirOrigen(HttpExchange ex) {
         String origen = ex.getRequestHeaders().getFirst("Origin");
         if (origen == null) {
             return true; // Postman, curl o el navegador directo
@@ -250,7 +250,7 @@ public class ProductoControlador implements HttpHandler {
         return true;
     }
 
-    private static void responder(HttpExchange ex, int codigo, String json) throws IOException {
+    static void responder(HttpExchange ex, int codigo, String json) throws IOException {
         if (json == null) {
             ex.sendResponseHeaders(codigo, -1);
             return;

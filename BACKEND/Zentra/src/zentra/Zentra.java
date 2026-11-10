@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.concurrent.Executors;
 import zentra.conexion.ConexionBD;
 import zentra.controlador.ProductoControlador;
+import zentra.controlador.ReporteControlador;
+import zentra.controlador.VentaControlador;
 
 /**
  * Punto de arranque de ZENTRA (proyecto NetBeans: Java with Ant).
@@ -42,10 +44,14 @@ public class Zentra {
             return;
         }
         servidor.createContext(ProductoControlador.RUTA, new ProductoControlador());
+        servidor.createContext(VentaControlador.RUTA, new VentaControlador());
+        servidor.createContext(ReporteControlador.RUTA, new ReporteControlador());
         servidor.setExecutor(Executors.newFixedThreadPool(4));
         servidor.start();
 
-        System.out.println("API lista en http://localhost:" + PUERTO + ProductoControlador.RUTA);
+        System.out.println("API lista en http://localhost:" + PUERTO + "/api");
+        System.out.println("  " + ProductoControlador.RUTA + "  " + VentaControlador.RUTA
+                + "  " + ReporteControlador.RUTA);
         System.out.println("Para detenerla, pulsa el boton rojo de NetBeans o Ctrl + C.");
     }
 }

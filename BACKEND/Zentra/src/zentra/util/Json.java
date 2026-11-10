@@ -40,6 +40,35 @@ public final class Json {
         return sb.append(']').toString();
     }
 
+    /** Escribe un objeto con valores de texto, números o booleanos. */
+    public static String objeto(Map<String, Object> datos) {
+        StringBuilder sb = new StringBuilder("{");
+        for (Map.Entry<String, Object> e : datos.entrySet()) {
+            if (sb.length() > 1) {
+                sb.append(',');
+            }
+            sb.append(cadena(e.getKey())).append(':');
+            Object v = e.getValue();
+            if (v instanceof Number || v instanceof Boolean) {
+                sb.append(v);
+            } else {
+                sb.append(cadena(v == null ? null : v.toString()));
+            }
+        }
+        return sb.append('}').toString();
+    }
+
+    public static String objetos(List<Map<String, Object>> lista) {
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < lista.size(); i++) {
+            if (i > 0) {
+                sb.append(',');
+            }
+            sb.append(objeto(lista.get(i)));
+        }
+        return sb.append(']').toString();
+    }
+
     /** Escribe un objeto {"clave":"mensaje", ...} para los errores. */
     public static String mensajes(Map<String, String> mensajes) {
         StringBuilder sb = new StringBuilder("{");
