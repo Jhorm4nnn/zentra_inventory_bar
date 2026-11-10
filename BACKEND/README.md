@@ -5,6 +5,8 @@ Sistema de gestión de ventas e inventario para el Estanco Dejavu. Este proyecto
 | Carpeta | Contenido |
 |---|---|
 | `BACKEND/` | API REST con Spring Boot 4.1.2 y Java 21 |
+| `BACKEND/Zentra/` | Backend para NetBeans (Java with Ant); ver su README |
+| `BACKEND/Base_Datos/` | Scripts MySQL de la base `zentra_bar`, según el diagrama de clases |
 | `FRONTEND/` | Páginas HTML y CSS; `productos.html` ya usa la API |
 | `DATABASE/` | Script SQL de referencia |
 | `TESTING/` | Colección de Postman |
