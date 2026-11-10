@@ -10,7 +10,7 @@ Proyecto **Java with Ant → Java Application** de NetBeans. Expone la API de pr
 | `zentra.modelo` | Las clases del diagrama: `Usuario`, `RolUsuario`, `Producto`, `Venta`, `DetalleVenta`, `Reporte`, `TipoReporte` |
 | `zentra.conexion` | `ConexionBD`: conexión JDBC con MySQL |
 | `zentra.dao` | `ProductoDAO`, `VentaDAO` y `ReporteDAO`: consultas SQL |
-| `zentra.controlador` | `ProductoControlador`, `VentaControlador` y `ReporteControlador`: atienden las peticiones HTTP del frontend |
+| `zentra.controlador` | `ProductoControlador`, `VentaControlador` y `ReporteControlador` atienden la API; `FrontendControlador` sirve las páginas |
 | `zentra.util` | `Json`: convierte entre JSON y objetos Java |
 
 No usa Maven ni descargas: solo el JDK y el driver de MySQL, que ya está en `lib/`.
@@ -27,9 +27,13 @@ No usa Maven ni descargas: solo el JDK y el driver de MySQL, que ya está en `li
 ## Abrir y ejecutar en NetBeans
 
 1. *File → Open Project* y elige la carpeta `BACKEND/Zentra`. Aparece con el icono de taza de café.
-2. Pulsa **Run Project** (F6). En la ventana *Output* debe salir `API lista en http://localhost:8080/api/productos`.
-3. Abre `FRONTEND/productos.html` con Live Server (puerto 5500) y verás los productos de MySQL.
+2. Pulsa **Run Project** (F6). En la ventana *Output* debe salir `Abre la pagina en: http://localhost:8080/productos.html`.
+3. Abre esa dirección en el navegador. El backend sirve también las páginas de `FRONTEND`, así que **no hace falta Live Server**.
 4. Para detenerlo, pulsa el cuadrado rojo de la ventana *Output*.
+
+El backend encuentra el frontend porque busca `../../FRONTEND`, así que abre el proyecto desde el repositorio clonado (`zentra_inventory_bar/BACKEND/Zentra`), no desde una copia suelta. Si la copia está en otro lugar, en *Properties → Run → VM Options* pon `-Dzentra.frontend=RUTA_A_FRONTEND`.
+
+También puedes seguir usando Live Server: la API acepta páginas de `localhost` o `127.0.0.1` en cualquier puerto. Lo que **no** funciona es abrir el HTML con doble clic (`file:///`): el navegador lo bloquea y la página dice «¿Está encendida la API?».
 
 El backend de Spring Boot y este proyecto usan el mismo puerto 8080: enciende solo uno a la vez.
 

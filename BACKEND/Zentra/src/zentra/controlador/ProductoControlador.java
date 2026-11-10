@@ -12,7 +12,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
+import java.util.regex.Pattern;
 import zentra.dao.ProductoDAO;
 import zentra.modelo.Producto;
 import zentra.util.Json;
@@ -31,9 +31,13 @@ public class ProductoControlador implements HttpHandler {
 
     public static final String RUTA = "/api/productos";
 
-    /** Orígenes del frontend autorizados (Live Server en el puerto 5500). */
-    private static final Set<String> ORIGENES = Set.of(
-            "http://127.0.0.1:5500", "http://localhost:5500");
+    /**
+     * Orígenes del frontend autorizados: páginas de este mismo equipo
+     * (localhost o 127.0.0.1) en cualquier puerto, como Live Server (5500)
+     * o el propio backend (8080).
+     */
+    private static final Pattern ORIGENES =
+            Pattern.compile("http://(localhost|127\\.0\\.0\\.1)(:\\d{1,5})?");
 
     private final ProductoDAO dao = new ProductoDAO();
 
@@ -239,7 +243,7 @@ public class ProductoControlador implements HttpHandler {
         if (origen == null) {
             return true; // Postman, curl o el navegador directo
         }
-        if (!ORIGENES.contains(origen)) {
+        if (!ORIGENES.matcher(origen).matches()) {
             return false;
         }
         Headers h = ex.getResponseHeaders();
